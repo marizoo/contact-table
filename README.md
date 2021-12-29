@@ -1,3 +1,3 @@
-a WHAT website created with React + styled component
-+ using WHAT...
-![Screenshot of the site](./screenshots/Agensy-website-800.png)
+A Simple contact table created with React.
+It is editable yo!
+![Screenshot of the site](./28.contact-table-600.png)
