@@ -1,3 +1,4 @@
+//----------------------------------------------------------------------------------------------//
 
 import React, {useState, Fragment} from 'react'
 import './App.css'
@@ -79,9 +80,15 @@ const App = () => {
     }
 
     const newContacts = [...contacts];
+
+    const index = contacts.findIndex( contact => contact.id === editContactId )
+
+    newContacts[index] = editedContact;
+
+    setContacts(newContacts);
+    setEditContactId(null);
   }
 
-  //  START HERE AGAIN
 
   const handleEditClick = (ev, contact) => {
     ev.preventDefault();
@@ -98,9 +105,25 @@ const App = () => {
     setEditFormData(formValues);
   }
 
+  // FOR CANCEL BUTTON
+  const handleCancelClick = () => {
+    setEditContactId(null);
+  }
+
+  // TO DELETE
+  const handleDeleteClick = (contactId) => {
+      const newContacts = [...contacts];
+
+      const index = contacts.findIndex(contact => contact.id === contactId);
+
+      newContacts.splice(index, 1);
+
+      setContacts(newContacts);
+  }
+
   return (
     <div className='app-container'>
-      <form>
+      <form onSubmit={handleEditFormSubmit}>
       <table>
         <thead>
           <tr>
@@ -116,8 +139,16 @@ const App = () => {
           {contacts.map((contact) => (
             <Fragment>  
               {editContactId === contact.id
-                ?  <EditableRow editFormData={editFormData} onHandleEditFormChange={handleEditFormChange}/>
-                : <ReadOnlyRow contact={contact} onHandleEditClick={handleEditClick}/>
+                ?  <EditableRow 
+                      editFormData={editFormData} 
+                      onHandleEditFormChange={handleEditFormChange}
+                      onHandleCancelClick={handleCancelClick}
+                    />
+                : <ReadOnlyRow 
+                      contact={contact} 
+                      onHandleEditClick={handleEditClick}
+                      onHandleDeleteClick={handleDeleteClick}
+                  />
               }      
             </Fragment>
           ))}

@@ -1,6 +1,7 @@
+
 import React from 'react'
 
-const ReadOnlyRow = ({contact, onHandleEditClick}) => {
+const ReadOnlyRow = ({contact, onHandleEditClick, onHandleDeleteClick}) => {
     return (
         <tr key={contact.id}>
             <td>{contact.fullName}</td>
@@ -14,9 +15,16 @@ const ReadOnlyRow = ({contact, onHandleEditClick}) => {
                 >
                 Edit
                 </button>
+                <button 
+                type="button" 
+                onClick={() => onHandleDeleteClick(contact.id)}
+                >
+                Delete
+                </button>
             </td>
         </tr>
     )
 }
 
 export default ReadOnlyRow
+
